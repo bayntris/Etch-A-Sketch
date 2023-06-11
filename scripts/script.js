@@ -47,7 +47,7 @@ function createGrid(size = 16) {
 
             // Add hover effect over each Grid Cell
             gridCell.addEventListener('mouseover', function(e) {
-                gridCell.style.backgroundColor = 'grey';
+                gridCell.style.backgroundColor = `rgb(${getRGBColor()})`;
             });
     
             gridRow.appendChild(gridCell);
@@ -58,8 +58,13 @@ function createGrid(size = 16) {
 }
 
 
-function getRGBColor {
-    let firstColour = Math.floor(Math.random() * 255);
+function getRGBColor() {
+    let firstColour = Math.floor(Math.random() * 256);
+    let secondColour = Math.floor(Math.random() * 256);
+    let thirdColour = Math.floor(Math.random() * 256);
+    
+
+    return `${firstColour}, ${secondColour}, ${thirdColour}`;
 }
 
 createGrid();

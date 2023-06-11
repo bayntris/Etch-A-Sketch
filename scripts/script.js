@@ -5,7 +5,8 @@ const grid = document.querySelector('#grid');
 const btnChangeGrid = document.querySelector('#btnChangeGrid');
 
 
-btnChangeGrid.addEventListener('click', function(e) {
+// Creates new grid with user's chosen size
+btnChangeGrid.addEventListener('click', function() {
     let size;
     do {
         size = +prompt("Please enter the desired size of the grid\ne.g Entering '20' will create a 20x20 grid", "");
@@ -14,6 +15,12 @@ btnChangeGrid.addEventListener('click', function(e) {
             size = +prompt("Sorry, the number must be 100 or under, please enter a valid number", "");
         }
     } while (size > 100);
+
+    // Remove everything from existing Grid
+    grid.innerHTML = '';
+
+    
+    createGrid(size);
 
 });
 
@@ -50,6 +57,11 @@ function createGrid(size = 16) {
     }
 }
 
-createGrid(50);
+
+function getRGBColor {
+    let firstColour = Math.floor(Math.random() * 255);
+}
+
+createGrid();
 
 

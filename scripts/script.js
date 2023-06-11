@@ -3,10 +3,40 @@ const gridContainer = document.querySelector('#grid-container');
 const grid = document.querySelector('#grid');
 
 const btnChangeGrid = document.querySelector('#btnChangeGrid');
+const btnRetro = document.querySelector('#btnRetro');
+const btnLSD = document.querySelector('#btnLSD');
 
 
-// Creates new grid with user's chosen size
-btnChangeGrid.addEventListener('click', function() {
+
+function createGrid(size = 16) {
+    for (let i = 0; i < size; i++) {
+
+        // Create a Row
+        const gridRow = document.createElement('div');
+        gridRow.classList.add('row');
+        gridRow.style.display = 'flex';
+    
+        // In each Row, create 16 Grid Cells
+        for (let j = 0; j < size; j++) {
+            const gridCell = document.createElement('div');
+            gridCell.classList.add('cell');
+            const dynamicWidth = 600 / size;
+            const dynamicHeight = 600 / size;
+    
+            gridCell.style.width = `${dynamicWidth}px`;
+            gridCell.style.height = `${dynamicHeight}px`;
+            gridCell.style.border = '1px solid black';
+
+            gridCell.addEventListener('mouseover', changeColourRetro);
+    
+            gridRow.appendChild(gridCell);
+        }
+    
+        grid.appendChild(gridRow);
+    }
+}
+
+function createNewGrid() {
     let size;
     do {
         size = +prompt("Please enter the desired size of the grid\ne.g Entering '20' will create a 20x20 grid", "");
@@ -21,42 +51,18 @@ btnChangeGrid.addEventListener('click', function() {
 
     
     createGrid(size);
-
-});
-
-function createGrid(size = 16) {
-    for (let i = 0; i < size; i++) {
-
-        // Create a Row
-        const gridRow = document.createElement('div');
-        gridRow.style.display = 'flex';
-    
-        // In each Row, create 16 Grid Cells
-        for (let j = 0; j < size; j++) {
-            const gridCell = document.createElement('div');
-            const dynamicWidth = 600 / size;
-            const dynamicHeight = 600 / size;
-    
-            gridCell.style.width = `${dynamicWidth}px`;
-            gridCell.style.height = `${dynamicHeight}px`;
-            
-            //gridCell.style.flex = '1';
-           // gridCell.style.height = '20px';
-           // gridCell.style.width = '20px';
-            gridCell.style.border = '1px solid black';
-
-            // Add hover effect over each Grid Cell
-            gridCell.addEventListener('mouseover', function(e) {
-                gridCell.style.backgroundColor = `rgb(${getRGBColor()})`;
-            });
-    
-            gridRow.appendChild(gridCell);
-        }
-    
-        grid.appendChild(gridRow);
-    }
 }
 
+
+function changeColourRGB(e) {
+    e.target.style.backgroundColor = `rgb(${getRGBColor()})`;
+    
+}
+
+function changeColourRetro(e) {
+    e.target.style.backgroundColor = 'grey';
+    
+}
 
 function getRGBColor() {
     let firstColour = Math.floor(Math.random() * 256);
@@ -67,6 +73,35 @@ function getRGBColor() {
     return `${firstColour}, ${secondColour}, ${thirdColour}`;
 }
 
+
+
+btnLSD.addEventListener('click', function() {
+    const gridCells = document.querySelectorAll('.cell');
+    gridCells.forEach((element) => {
+        element.removeEventListener('mouseover', changeColourRetro);
+        element.addEventListener('mouseover', changeColourRGB);
+    });
+});
+
+btnRetro.addEventListener('click', function() {
+    const gridCells = document.querySelectorAll('.cell');
+    gridCells.forEach((element) => {
+        element.removeEventListener('mouseover', changeColourRGB);
+        element.addEventListener('mouseover', changeColourRetro);
+    });
+});
+
+
+
+
+
+
+// Creates new grid with user's chosen size
+btnChangeGrid.addEventListener('click', createNewGrid);
+
+
+
 createGrid();
+
 
 

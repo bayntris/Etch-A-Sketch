@@ -20,6 +20,13 @@ header {
     margin-bottom: 20px;
 }
 
+
+#grid-container {
+    display: flex;
+    justify-content: center;
+   
+}
+
 #btnChangeGrid {
     border-radius: 10px;
     background-color: #3882F6;

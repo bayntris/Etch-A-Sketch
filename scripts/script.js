@@ -5,6 +5,8 @@ const grid = document.querySelector('#grid');
 const btnChangeGrid = document.querySelector('#btnChangeGrid');
 const btnRetro = document.querySelector('#btnRetro');
 const btnLSD = document.querySelector('#btnLSD');
+const btnModern = document.querySelector('#btnModern');
+
 
 
 
@@ -26,8 +28,11 @@ function createGrid(size = 16) {
             gridCell.style.width = `${dynamicWidth}px`;
             gridCell.style.height = `${dynamicHeight}px`;
             gridCell.style.border = '1px solid black';
+            
 
+            
             gridCell.addEventListener('mouseover', changeColourRetro);
+        
     
             gridRow.appendChild(gridCell);
         }
@@ -55,14 +60,34 @@ function createNewGrid() {
 
 
 function changeColourRGB(e) {
+    e.target.style.opacity = '';
     e.target.style.backgroundColor = `rgb(${getRGBColor()})`;
+    
+
     
 }
 
 function changeColourRetro(e) {
+    e.target.style.opacity = '';
     e.target.style.backgroundColor = 'grey';
     
 }
+
+function changeColourModern(e) {
+    e.target.style.backgroundColor = 'grey';
+    const currentOpacity = e.target.style.opacity;
+
+    if (currentOpacity) {
+        e.target.style.opacity = Number(currentOpacity) + .1;
+    }
+    else {
+        e.target.style.opacity = '0.1';
+    }
+    
+
+}
+
+
 
 function getRGBColor() {
     let firstColour = Math.floor(Math.random() * 256);
@@ -79,6 +104,7 @@ btnLSD.addEventListener('click', function() {
     const gridCells = document.querySelectorAll('.cell');
     gridCells.forEach((element) => {
         element.removeEventListener('mouseover', changeColourRetro);
+        element.removeEventListener('mouseover', changeColourModern);
         element.addEventListener('mouseover', changeColourRGB);
     });
 });
@@ -87,12 +113,20 @@ btnRetro.addEventListener('click', function() {
     const gridCells = document.querySelectorAll('.cell');
     gridCells.forEach((element) => {
         element.removeEventListener('mouseover', changeColourRGB);
+        element.removeEventListener('mouseover', changeColourModern);
         element.addEventListener('mouseover', changeColourRetro);
+        
     });
 });
 
-
-
+btnModern.addEventListener('click', function() {
+    const gridCells = document.querySelectorAll('.cell');
+    gridCells.forEach((element) => {
+        element.removeEventListener('mouseover', changeColourRGB);
+        element.removeEventListener('mouseover', changeColourRetro);
+        element.addEventListener('mouseover', changeColourModern);
+    });
+});
 
 
 
@@ -102,6 +136,7 @@ btnChangeGrid.addEventListener('click', createNewGrid);
 
 
 createGrid();
+
 
 
 

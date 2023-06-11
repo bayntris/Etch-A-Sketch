@@ -40,6 +40,13 @@ header {
     box-shadow: 0 3px 10px black;
 }
 
+#buttonContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
 #btnChangeGrid {
     border-radius: 10px;
     background-color: #3882F6;

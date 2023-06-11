@@ -5,7 +5,12 @@
 
 html {
     font-family: 'Goldman', cursive;
+    box-sizing: border-box;
     
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 body {
@@ -25,6 +30,12 @@ header {
     display: flex;
     justify-content: center;
    
+}
+
+
+#grid {
+    width: 600px;
+    height: 600px;
 }
 
 #btnChangeGrid {
